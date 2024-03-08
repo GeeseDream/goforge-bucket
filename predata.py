@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python3
 
 import base64
 import os
@@ -11,7 +12,7 @@ def main():
     gpt_list = []
     for root, dirs, files in os.walk(path):
         for file in files:
-            if file.endswith(".json"):
+            if file.endswith(".json") and file != "gptlist.json":
                 # 转换为相对路径
                 file = os.path.join(root, file)
                 icon = os.path.join(root, "icon.png")
@@ -24,6 +25,7 @@ def main():
                     data = f.read()
                     data = json.loads(data)
                     data['icon'] = icon_base64
+                    
                 gpt_list.append(data)
     # 输出json文件
     with open("gptlist.json", 'w', encoding='utf-8') as f:
