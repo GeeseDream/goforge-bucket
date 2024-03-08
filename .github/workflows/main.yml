@@ -1,11 +1,11 @@
-name: Build and GPT list
+name: Pre Data list
 
 on:
   push:
     branches:
       - main  # 或你用于开发的分支名
     paths:
-      - '/**/**.json'
+      - '**/**.json'
 
 jobs:
   build_and_deploy:
