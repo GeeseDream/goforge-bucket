@@ -18,8 +18,8 @@ jobs:
       uses: actions/setup-python@v5.0.0
       with:
         python-version: 3.12
-    - name: Pre Data GPT List
-      run: ./predata.py
+    - name: Pre Data List
+      run: python3 ./predata.py
 
     - name: Commit and Push to build Branch
       run: |
