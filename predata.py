@@ -27,7 +27,7 @@ def main():
                     data['icon'] = icon_base64
                     
                 gpt_list.append(data)
-    # 输出json文件
+    # 输出json文件.
     with open("gptlist.json", 'w', encoding='utf-8') as f:
         json.dump(gpt_list, f, ensure_ascii=False, indent=4)    
     
