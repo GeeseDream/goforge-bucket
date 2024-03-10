@@ -1,0 +1,35 @@
+name: Pre Data list
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # 确保能够检出所有分支和历史
+
+    - name: Setup Python
+      uses: actions/setup-python@v5.0.0
+      with:
+        python-version: '3.12'
+
+    - name: Pre Data List
+      run: python3 ./predata.py
+
+    - name: Commit and Push to build Branch
+      run: |
+       git config --global user.name 'GitHub Actions'
+       git config --global user.email 'actions@github.com'
+       git checkout --orphan temp-branch
+       # 假设此时工作目录中有 gptlist.json 和其他未跟踪的文件
+       git add gptlist.json
+       git commit -m "Update Data JSON"
+       git branch -M build
+       git push origin build -f
+
