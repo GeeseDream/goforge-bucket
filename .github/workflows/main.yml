@@ -24,12 +24,15 @@ jobs:
 
     - name: Commit and Push to build Branch
       run: |
-        git config --global user.name 'GitHub Actions'
-        git config --global user.email 'actions@github.com'
-        git stash push -u
-        git checkout --orphan temp-branch
-        git stash pop
-        git add gptlist.json
-        git commit -m "Update Data JSON"
-        git branch -M build
-        git push origin build -f
+       git config --global user.name 'GitHub Actions'
+       git config --global user.email 'actions@github.com'
+       git stash push -u
+       git checkout --orphan temp-branch
+       git stash pop
+       git rm -rf . # 删除当前分支上的所有文件
+       git clean -fdx # 清理工作目录，删除所有未跟踪的文件和目录
+       git checkout stash -- gptlist.json # 仅从stash中恢复gptlist.json文件
+       git add gptlist.json
+       git commit -m "Update Data JSON"
+       git branch -M build
+       git push origin build -f
