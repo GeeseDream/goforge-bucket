@@ -24,7 +24,7 @@ def main():
                 with open(file, 'r', encoding='utf-8') as f:
                     data = f.read()
                     data = json.loads(data)
-                    data['icon'] = icon_base64
+                    data['icon'] = "data:image/png;base64," + icon_base64
                     
                 gpt_list.append(data)
     # 输出json文件.
